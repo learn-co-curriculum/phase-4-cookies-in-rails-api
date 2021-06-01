@@ -10,8 +10,8 @@
 Since cookies are such an important part of most web applications, Rails has
 excellent support for cookies and sessions baked in. Unfortunately for us, when
 you create a new application in API mode with `rails new appname --api`, the
-code needed for working with sessions and cookies in the controller is not
-included by default.
+code needed for working with sessions and cookies in the controller is
+excluded by default.
 
 To add session and cookie support back in, we need to update our application's
 configuration in the `config/application.rb` file:
@@ -38,8 +38,8 @@ end
 This will add in the necessary [middleware][] for working with sessions and cookies
 in our application.
 
-The last line also adds some additional security to our cookies by also
-configuring the as `SameSite` policy for our cookies as `strict`, which means
+The last line adds some additional security to our cookies by also
+configuring the `SameSite` policy for our cookies as `strict`, which means
 that the browser will only send these cookies in requests to websites that are
 on the same domain. This is a relatively new feature, but an important one for
 security! You can read more about [`SameSite` cookies here][same site cookies].
@@ -59,10 +59,10 @@ module here means all of our controllers will be able to work with cookies.
 
 ## Working With Sessions and Cookies
 
-To see a basic example of working with sessions and cookies, there's some
-starter code for a Rails API application. The configuration is already done, so
-we can work on inspecting sessions and cookies in the controller and see how we
-can interact with them in our code.
+We've included some starter code for a Rails API application with this lesson so
+you can see a basic example of working with sessions and cookies. The
+configuration is already done, so we can work on inspecting sessions and cookies
+in the controller and see how we can interact with them in our code.
 
 To set up and run the Rails application, run:
 
@@ -82,14 +82,14 @@ def index
 end
 ```
 
-In this method, we're setting a couple values on the `session` hash and the
-`cookies` hash, and serializing them in the response to view their values in the
+In this method, we're setting values on the `session` hash and the `cookies`
+hash, and serializing them in the response so we can view their values in the
 browser.
 
 > If you haven't encountered [`||=`][ruby or equals] syntax in Ruby, it's a
 > shorthand way to assign a value if the current value is `nil` or `false`. So
 > if `session[:session_hello]` has not already been assigned a value, it will be
-> assigned a value of 5. Otherwise, it won't get assigned a new value.
+> assigned a value of "World". Otherwise, it won't get assigned a new value.
 
 The first time a user makes a request to this controller, Rails will include the
 `Set-Cookie` **response header** with our sessions and cookies values, which
@@ -118,22 +118,23 @@ store key-value pairs of data. The entire session hash is actually stored in
 that `_session_id` cookie, in a signed and encrypted format, which makes it
 impossible for users to tamper with.
 
-You can view directly in the browser as well. In the developer tools, find the
-**Application** tab, and go to the **Cookies** section. There, you'll find all
-the cookies for our domain (`http://localhost:3000`):
+You can view cookie information directly in the browser as well. In the
+developer tools, find the **Application** tab, and go to the **Cookies** section
+(under "Storage" in the pane on the left). There, you'll find all the cookies
+for our domain (`http://localhost:3000`):
 
 ![cookies in dev tools](https://curriculum-content.s3.amazonaws.com/phase-4/cookies-in-rails-api/cookies-devtools.png)
 
-You can even edit cookies directly in the dev tools. Try changing the value of
-the `cookies_hello` key in the cookies to something new. Then refresh the page
-in the browser to make another request. You can view the cookies that are being
-sent in the **request headers** in the dev tools as well:
+Cookies can be edited directly in the dev tools. Try changing the value of the
+`cookies_hello` key to something new. Then refresh the page in the browser to
+make another request. If you try to edit the `_session_id` cookie, on the other
+hand, it will have no effect thanks to Rails security features like signing and
+encryption.
+
+Finally, you can also view cookies by looking at the **request headers** (under
+the Network tab, click "sessions" then "Headers"):
 
 ![cookies in headers](https://curriculum-content.s3.amazonaws.com/phase-4/cookies-in-rails-api/cookies-headers.png)
-
-You can also try editing the `_session_id` cookie; however, thanks to Rails
-security features like signing and encryption, editing this cookie won't have
-any effect.
 
 ## Explore
 
@@ -159,10 +160,11 @@ When working with Rails in API mode, we need to add some additional configuratio
 to get them working again.
 
 Cookies are an integral part of modern web applications; they help keep track of
-**stateful** information in an inherently **stateless** protocol by automatically
-including additional data as part of each request using the headers. We can use
-the developer tools to get a better sense of how cookies are being used by websites
-by inspecting the request/response headers as well as the application storage.
+**stateful** information in an inherently **stateless** protocol by
+automatically passing additional data with each request using the headers. We
+can use the developer tools to get a better sense of how cookies are being used
+by websites by either inspecting the request/response headers under the Network
+tab or looking at storage under the Application tab.
 
 ## Resources
 
