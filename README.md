@@ -151,7 +151,7 @@ end
 
 Experiment in the browser by changing the cookie values and making more requests
 to the server. Use the `byebug` to see how changing these values in the browser
-affects what is available in the sessions and cookies hashes.
+affects what is available in the session and cookies hashes.
 
 ## Conclusion
 
