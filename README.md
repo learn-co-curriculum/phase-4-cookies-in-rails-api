@@ -66,9 +66,9 @@ in the controller and see how we can interact with them in our code.
 
 To set up and run the Rails application, run:
 
-```sh
-bundle install
-rails s
+```console
+$ bundle install
+$ rails s
 ```
 
 Then, in the browser, make a request to `http://localhost:3000/sessions`. This
