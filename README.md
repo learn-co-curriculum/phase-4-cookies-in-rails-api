@@ -162,9 +162,17 @@ to get them working again.
 Cookies are an integral part of modern web applications; they help keep track of
 **stateful** information in an inherently **stateless** protocol by
 automatically passing additional data with each request using the headers. We
-can use the developer tools to get a better sense of how cookies are being used
-by websites by either inspecting the request/response headers under the Network
-tab or looking at storage under the Application tab.
+can get a better sense of how cookies are being used by websites using the
+browser dev tools.
+
+## Check For Understanding
+
+Before you move on, make sure you can answer the following questions:
+
+1. What configuration changes need to be made to enable session and cookie
+   support in a Rails API application?
+2. What are the two ways you can inspect a website's cookies using the browser
+   dev tools?
 
 ## Resources
 
